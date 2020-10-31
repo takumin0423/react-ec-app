@@ -5,7 +5,7 @@ export const signInAction = (userState) => {
     payload: {
       isSignedIn: true,
       uid: userState.uid,
-      username: userState.username,
+      userName: userState.userName,
     },
   };
 };
@@ -17,7 +17,7 @@ export const signOutAction = () => {
     payload: {
       isSignedIn: false,
       uid: '',
-      username: '',
+      userName: '',
     },
   };
 };
