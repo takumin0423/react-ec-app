@@ -11,7 +11,7 @@ export const signIn = () => {
       return;
     }
 
-    // 非同期処理の仮実装として、githubのAPIを叩く
+    // 非同期処理の仮実装サンプルとして、githubのAPIを叩く
     const url = 'https://api.github.com/users/takumin0423';
     const response = await fetch(url)
         .then(res => res.json())
