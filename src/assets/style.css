@@ -11,7 +11,7 @@
     height: 20px
 }
 
-.module-spacer--medium {
+.medium-space {
     height: 32px
 }
 
@@ -137,11 +137,11 @@
     text-align: right;
 }
 
-.u-text-center {
+.text-center {
     text-align: center;
 }
 
-.u-text__headline {
+.text-headline {
     color: #4dd0e1;
     font-size: 1.563rem;
     margin: 0 auto 1rem auto;
