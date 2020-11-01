@@ -2,6 +2,8 @@ import React, {useCallback, useState} from 'react';
 import {PrimaryButton, TextInput} from '../components/generic';
 import {resetPassword} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router'
+import SecondaryButton from '../components/generic/SecondaryButton';
 
 const PasswordReset = () => {
   const dispatch = useDispatch();
@@ -37,6 +39,14 @@ const PasswordReset = () => {
           <PrimaryButton
               label={'パスワードをリセットする'}
               onClick={() => dispatch(resetPassword(email))}
+          />
+          <SecondaryButton
+              label={'アカウント登録ページ'}
+              onClick={() => dispatch(push('/signup'))}
+          />
+          <SecondaryButton
+              label={'ログインページ'}
+              onClick={() => dispatch(push('/signin'))}
           />
         </div>
       </div>

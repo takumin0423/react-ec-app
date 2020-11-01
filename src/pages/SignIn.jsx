@@ -2,6 +2,8 @@ import React, {useCallback, useState} from 'react';
 import {PrimaryButton, TextInput} from '../components/generic';
 import {signIn} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
+import SecondaryButton from '../components/generic/SecondaryButton';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -53,6 +55,14 @@ const SignIn = () => {
           <PrimaryButton
               label={'ログイン'}
               onClick={() => dispatch(signIn(email, password))}
+          />
+          <SecondaryButton
+              label={'アカウント登録ページ'}
+              onClick={() => dispatch(push('/signup'))}
+          />
+          <SecondaryButton
+              label={'パスワードリセットページ'}
+              onClick={() => dispatch(push('/reset'))}
           />
         </div>
       </div>
