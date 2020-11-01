@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {PrimaryButton, TextInput} from '../components/generic';
-import {signUp} from '../reducks/users/operations';
+import {signIn} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 
 const SignIn = () => {
@@ -52,7 +52,7 @@ const SignIn = () => {
         <div className="center">
           <PrimaryButton
               label={'ログイン'}
-              onClick={() => dispatch(signUp(email, password))}
+              onClick={() => dispatch(signIn(email, password))}
           />
         </div>
       </div>

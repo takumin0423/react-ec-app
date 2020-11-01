@@ -65,6 +65,15 @@ export const signIn = (email, password) => {
                 .get()
                 .then(snapshot => {
                   const data = snapshot.data();
+
+                  dispatch(signInAction({
+                    isSignedIn: true,
+                    role: data.role,
+                    uid: data.uid,
+                    userName: data.userName,
+                  }));
+
+                  dispatch(push('/'));
                 });
           }
         });
