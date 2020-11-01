@@ -104,8 +104,6 @@ export const listenAuthState = () => {
                 uid: data.uid,
                 userName: data.userName,
               }));
-
-              dispatch(push('/'));
             });
       } else {
         dispatch(push('/signin'));
