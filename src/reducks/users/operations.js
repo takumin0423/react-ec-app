@@ -61,7 +61,6 @@ export const signIn = (email, password) => {
           const user = result.user;
 
           if (!!user) {
-            // todo 処理が重複しているので別メソッドとして切り出す
             const uid = user.uid;
 
             firestore.collection('users')
@@ -89,7 +88,6 @@ export const listenAuthState = () => {
   return async (dispatch) => {
     return auth.onAuthStateChanged(user => {
       if (!!user) {
-        // todo 処理が重複しているので別メソッドとして切り出す
         const uid = user.uid;
 
         firestore.collection('users')
