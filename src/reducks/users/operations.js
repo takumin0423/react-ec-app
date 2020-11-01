@@ -121,3 +121,21 @@ export const listenAuthState = () => {
     });
   };
 };
+
+// パスワードをリセットするメソッド
+export const resetPassword = (email) => {
+  return async (dispatch) => {
+    if (email === '') {
+      alert('必須項目が未入力です');
+      return false;
+    } else {
+      auth.sendPasswordResetEmail(email)
+          .then(() => {
+            alert('パスワードリセット用のメールを入力されたメールアドレス宛に送信しました！');
+            dispatch('/signin')
+          }).catch(() => {
+            alert('パスワードリセット用のメールの送信に失敗しました')
+      })
+    }
+  };
+};
