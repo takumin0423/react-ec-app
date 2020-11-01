@@ -1,7 +1,11 @@
 import React, {useCallback, useState} from 'react';
-import {TextInput} from '../components/generic';
+import {PrimaryButton, TextInput} from '../components/generic';
+import {signUp} from '../reducks/users/operations';
+import {useDispatch} from 'react-redux';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +29,7 @@ const SignUp = () => {
 
   return (
       <div className="container">
-        <h2 className="text-headline text-center">アカウント登録</h2>
+        <h1 className="text-headline text-center">アカウント登録</h1>
 
         {/* 空白を表現するためのDOM */}
         <div className="medium-space"/>
@@ -54,7 +58,7 @@ const SignUp = () => {
 
         <TextInput
             fullWidth={true}
-            label={'パスワード'}
+            label={'パスワード(6文字以上の英数字)'}
             multiline={false}
             required={true}
             rows={1}
@@ -73,6 +77,16 @@ const SignUp = () => {
             type={'password'}
             onChange={inputConfirmPassword}
         />
+
+        {/* 空白を表現するためのDOM */}
+        <div className="medium-space"/>
+
+        <div className="center">
+          <PrimaryButton
+              label={'アカウントを登録する'}
+              onClick={() => dispatch(signUp(userName, email, password, confirmPassword))}
+          />
+        </div>
       </div>
   );
 };
