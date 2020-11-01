@@ -1,4 +1,4 @@
-import {signInAction} from './actions';
+import {signInAction, signOutAction} from './actions';
 import {push} from 'connected-react-router';
 import {auth, firebaseTimestamp, firestore} from '../../firebase';
 
@@ -79,6 +79,18 @@ export const signIn = (email, password) => {
                   dispatch(push('/'));
                 });
           }
+        });
+  };
+};
+
+// ログアウトのメソッド
+export const signOut = () => {
+  return async (dispatch) => {
+    auth.signOut()
+        .then(() => {
+          dispatch(signOutAction());
+
+          dispatch(push('signin'));
         });
   };
 };
