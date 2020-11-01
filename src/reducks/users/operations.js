@@ -3,19 +3,21 @@ import {push} from 'connected-react-router';
 import {auth, firebaseTimestamp, firestore} from '../../firebase';
 
 // アカウント登録のメソッド
-// アカウント登録に必要な情報を引数で受け取る
 export const signUp = (userName, email, password, confirmPassword) => {
   return async (dispatch) => {
     if (userName === '' || email === '' || password === '' || confirmPassword === '') {
       alert('必須項目が未入力です');
+
       return false;
     }
 
     if (password !== confirmPassword) {
       alert('パスワードが一致していません');
+
       return false;
     }
 
+    // 入力されたメールアドレスとパスワードでアカウント登録をする
     return auth.createUserWithEmailAndPassword(email, password)
         .then(result => {
           const user = result.user;
@@ -45,19 +47,21 @@ export const signUp = (userName, email, password, confirmPassword) => {
 };
 
 // ログインのメソッド
-// ログインに必要な情報を引数で受け取る
 export const signIn = (email, password) => {
   return async (dispatch) => {
     if (email === '' || password === '') {
       alert('必須項目が未入力です');
+
       return false;
     }
 
+    // 入力されたメールアドレスとパスワードでログインをする
     auth.signInWithEmailAndPassword(email, password)
         .then(result => {
           const user = result.user;
 
           if (!!user) {
+            // todo 処理が重複しているので別メソッドとして切り出す
             const uid = user.uid;
 
             firestore.collection('users')
@@ -77,5 +81,35 @@ export const signIn = (email, password) => {
                 });
           }
         });
+  };
+};
+
+// 認証状態を監視するメソッド
+export const listenAuthState = () => {
+  return async (dispatch) => {
+    return auth.onAuthStateChanged(user => {
+      if (!!user) {
+        // todo 処理が重複しているので別メソッドとして切り出す
+        const uid = user.uid;
+
+        firestore.collection('users')
+            .doc(uid)
+            .get()
+            .then(snapshot => {
+              const data = snapshot.data();
+
+              dispatch(signInAction({
+                isSignedIn: true,
+                role: data.role,
+                uid: data.uid,
+                userName: data.userName,
+              }));
+
+              dispatch(push('/'));
+            });
+      } else {
+        dispatch(push('/signin'));
+      }
+    });
   };
 };
