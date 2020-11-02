@@ -14,12 +14,10 @@ const useStyles = makeStyles({
 
 const ImageArea = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const images = props.images;
 
   // 画像アップロード機能
   const uploadImage = useCallback((event) => {
-    const file = event.target.value;
+    const file = event.target.files;
     let blob = new Blob(file, {type: 'image/jpeg'});
 
     // ランダムな16桁の文字列を生成する
@@ -53,6 +51,7 @@ const ImageArea = (props) => {
                   className="none-display"
                   id="product-image"
                   type="file"
+                  onChange={event => uploadImage(event)}
               />
             </label>
           </IconButton>
