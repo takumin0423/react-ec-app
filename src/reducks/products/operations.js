@@ -4,7 +4,7 @@ import {push} from 'connected-react-router';
 const productRef = firestore.collection('products');
 
 // 商品情報をデータベースに追加するメソッド
-export const saveProduct = (name, description, category, gender, price) => {
+export const saveProduct = (name, description, category, gender, price, images) => {
   return async (dispatch) => {
     const timestamp = firebaseTimestamp.now();
 
@@ -14,6 +14,7 @@ export const saveProduct = (name, description, category, gender, price) => {
       category: category,
       gender: gender,
       price: parseInt(price, 10),
+      images: images,
       updatedAt: timestamp,
     };
 
