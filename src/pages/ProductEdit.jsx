@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react';
+import {TextInput} from '../components/generic';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -10,6 +11,22 @@ const ProductEdit = () => {
   const inputName = useCallback((event) => {
     setName(event.target.value);
   }, [setName]);
+
+  const inputDescription = useCallback((event) => {
+    setDescription(event.target.value);
+  }, [setDescription]);
+
+  const inputCategory = useCallback((event) => {
+    setCategory(event.target.value);
+  }, [setCategory]);
+
+  const inputGender = useCallback((event) => {
+    setGender(event.target.value);
+  }, [setGender]);
+
+  const inputPrice = useCallback((event) => {
+    setPrice(event.target.value);
+  }, [setPrice]);
 
   return (
       <section>
@@ -25,6 +42,28 @@ const ProductEdit = () => {
               rows={1}
               value={name}
               type={'text'}
+          />
+
+          <TextInput
+              fullWidth={true}
+              label={'説明'}
+              multiline={true}
+              required={true}
+              onChange={inputDescription}
+              rows={5}
+              value={description}
+              type={'text'}
+          />
+
+          <TextInput
+              fullWidth={true}
+              label={'価格'}
+              multiline={false}
+              required={true}
+              onChange={inputPrice}
+              rows={1}
+              value={price}
+              type={'number'}
           />
         </div>
       </section>
