@@ -16,14 +16,6 @@ const ProductEdit = () => {
     setDescription(event.target.value);
   }, [setDescription]);
 
-  const inputCategory = useCallback((event) => {
-    setCategory(event.target.value);
-  }, [setCategory]);
-
-  const inputGender = useCallback((event) => {
-    setGender(event.target.value);
-  }, [setGender]);
-
   const inputPrice = useCallback((event) => {
     setPrice(event.target.value);
   }, [setPrice]);
