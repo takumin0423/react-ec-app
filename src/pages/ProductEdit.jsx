@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
 import {useDispatch} from 'react-redux';
 import {saveProduct} from '../reducks/products/operations';
+import ImageArea from '../components/products/ImageArea';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -103,6 +104,8 @@ const ProductEdit = () => {
               select={setGender}
               options={genders}
           />
+
+          <ImageArea/>
 
           <div className="medium-space"/>
 

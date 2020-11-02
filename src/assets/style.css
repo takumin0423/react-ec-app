@@ -133,7 +133,7 @@
     text-align: left;
 }
 
-.u-text-right {
+.right-text {
     text-align: right;
 }
 
@@ -142,14 +142,18 @@
 }
 
 .text-headline {
-    color: #000000;
+    color: rgba(0, 0, 0, 0.54);
     font-size: 40px;
     font-weight: 900;
     margin: 16px auto 16px auto;
 }
 
-.u-display-none {
+.none-display {
     display: none;
+}
+
+.add-product-image-text {
+    color: rgba(0, 0, 0, 0.54);
 }
 
 @media screen and (min-width: 576px) {
