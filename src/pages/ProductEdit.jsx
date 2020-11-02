@@ -10,6 +10,7 @@ const ProductEdit = () => {
   const [category, setCategory] = useState('');
   const [gender, setGender] = useState('');
   const [price, setPrice] = useState('');
+  const [images, setImages] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -105,7 +106,10 @@ const ProductEdit = () => {
               options={genders}
           />
 
-          <ImageArea/>
+          <ImageArea
+              images={images}
+              setImages={setImages}
+          />
 
           <div className="medium-space"/>
 
