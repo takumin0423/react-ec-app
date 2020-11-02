@@ -1,5 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
+import {useDispatch} from 'react-redux';
+import {saveProduct} from '../reducks/products/selectors';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -7,6 +9,8 @@ const ProductEdit = () => {
   const [category, setCategory] = useState('');
   const [gender, setGender] = useState('');
   const [price, setPrice] = useState('');
+
+  const dispatch = useDispatch();
 
   const inputName = useCallback((event) => {
     setName(event.target.value);
@@ -105,7 +109,7 @@ const ProductEdit = () => {
           <div className="center">
             <PrimaryButton
                 label={'保存する'}
-
+                onClick={() => dispatch(saveProduct(name, description, category, gender, price))}
             />
           </div>
         </div>
