@@ -75,29 +75,29 @@
     flex-flow: row wrap;
 }
 
-.p-grid__list-images {
+.images-list {
     display: flex;
     flex-flow: wrap;
 }
 
-.p-grid__list-images > .p-media__thumb {
+.images-list > .thumbnail-image {
     margin: .5rem;
     width: calc(50% - 1rem);
 }
 
-.p-media__thumb {
+.thumbnail-image {
     position: relative;
     overflow: hidden;
     width: 100%
 }
 
-.p-media__thumb::before {
+.thumbnail-image::before {
     content: "";
     display: block;
     padding-top: 100%;
 }
 
-.p-media__thumb > img {
+.thumbnail-image > img {
     position: absolute;
     object-fit: cover;
     object-position: center;

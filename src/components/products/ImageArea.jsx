@@ -4,6 +4,7 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import {makeStyles} from '@material-ui/styles';
 import {useDispatch} from 'react-redux';
 import {storage} from '../../firebase';
+import ImagePreview from './ImagePreview';
 
 const useStyles = makeStyles({
   icon: {
@@ -42,6 +43,11 @@ const ImageArea = (props) => {
 
   return (
       <div>
+        <div className="images-list">
+          {props.images.length > 0 && (
+              props.images.map(image => <ImagePreview path={image.path} key={image.id} id={image.id}/>)
+          )}
+        </div>
         <div className="right-text">
           <span className="add-product-image-text">商品の画像</span>
           <IconButton className={classes.icon}>
