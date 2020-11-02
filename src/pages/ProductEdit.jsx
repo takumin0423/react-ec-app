@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
 import {useDispatch} from 'react-redux';
-import {saveProduct} from '../reducks/products/selectors';
+import {saveProduct} from '../reducks/products/operations';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
