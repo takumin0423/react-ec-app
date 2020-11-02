@@ -4,7 +4,7 @@ import {push} from 'connected-react-router';
 const productRef = firestore.collection('products');
 
 // 商品情報をデータベースに追加するメソッド
-export const saveProduct = (name, description, category, gender, price, images) => {
+export const saveProduct = (id, name, description, category, gender, price, images) => {
   return async (dispatch) => {
     const timestamp = firebaseTimestamp.now();
 
@@ -18,13 +18,16 @@ export const saveProduct = (name, description, category, gender, price, images) 
       updatedAt: timestamp,
     };
 
-    const ref = productRef.doc();
+    // 商品の新規登録の場合のみの処理
+    if (id === '') {
+      const ref = productRef.doc();
+      id = ref.id;
+      data.id = id;
+      data.createdAt = timestamp;
+    }
 
-    data.id = ref.id;
-    data.createdAt = timestamp;
-
-    return productRef.doc(ref.id)
-        .set(data)
+    return productRef.doc(id)
+        .set(data, {merge: true})
         .then(() => {
           dispatch(push('/'));
         }).catch((error) => {

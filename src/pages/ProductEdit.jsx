@@ -1,8 +1,9 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
 import {useDispatch} from 'react-redux';
 import {saveProduct} from '../reducks/products/operations';
 import ImageArea from '../components/products/ImageArea';
+import {firestore} from '../firebase';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -13,6 +14,14 @@ const ProductEdit = () => {
   const [images, setImages] = useState([]);
 
   const dispatch = useDispatch();
+
+  // path情報
+  let id = window.location.pathname.split('/product/edit')[1];
+
+  // 編集時
+  if (id !== '') {
+    id = id.split('/')[1];
+  }
 
   const inputName = useCallback((event) => {
     setName(event.target.value);
@@ -52,9 +61,29 @@ const ProductEdit = () => {
     },
   ];
 
+  // マウント後の処理
+  useEffect(() => {
+    // 編集ページの場合
+    if (id !== '') {
+      firestore.collection('products')
+          .doc(id)
+          .get()
+          .then(snapshot => {
+            const product = snapshot.data();
+
+            setName(product.name);
+            setDescription(product.description);
+            setCategory(product.category);
+            setGender(product.gender);
+            setPrice(product.price);
+            setImages(product.images);
+          });
+    }
+  }, []);
+
   return (
       <section>
-        <h1 className="text-headline text-center">商品を登録してください</h1>
+        <h1 className="text-headline text-center">商品ページ</h1>
 
         <div className="container">
           <TextInput
@@ -116,7 +145,7 @@ const ProductEdit = () => {
           <div className="center">
             <PrimaryButton
                 label={'保存する'}
-                onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
+                onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images, id))}
             />
           </div>
         </div>
