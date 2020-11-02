@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {TextInput} from '../components/generic';
+import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -19,6 +19,32 @@ const ProductEdit = () => {
   const inputPrice = useCallback((event) => {
     setPrice(event.target.value);
   }, [setPrice]);
+
+  const categories = [
+    {
+      id: 'tops',
+      name: 'トップス',
+    },
+    {
+      id: 'bottom',
+      name: 'ボトムス',
+    },
+  ];
+
+  const genders = [
+    {
+      id: 'male',
+      name: '男性',
+    },
+    {
+      id: 'female',
+      name: '女性',
+    },
+    {
+      id: 'unisex',
+      name: 'ユニセックス',
+    },
+  ];
 
   return (
       <section>
@@ -57,6 +83,31 @@ const ProductEdit = () => {
               value={price}
               type={'number'}
           />
+
+          <SelectBox
+              label={'カテゴリー'}
+              required={true}
+              value={category}
+              select={setCategory}
+              options={categories}
+          />
+
+          <SelectBox
+              label={'性別'}
+              required={true}
+              value={gender}
+              select={setGender}
+              options={genders}
+          />
+
+          <div className="medium-space"/>
+
+          <div className="center">
+            <PrimaryButton
+                label={'保存する'}
+
+            />
+          </div>
         </div>
       </section>
   );
