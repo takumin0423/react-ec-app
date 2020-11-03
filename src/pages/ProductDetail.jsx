@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/styles';
 import HTMLReactParser from 'html-react-parser';
 import ImageSwiper from '../components/products/ImageSwiper';
+import SizeTable from '../components/products/SizeTable';
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {
@@ -75,12 +76,14 @@ const ProductDetail = () => {
               </div>
               <div className={classes.detail}>
                 <h1 className="text-headline">{product.name}</h1>
-                <p className={classes.price}>¥{product.price.toLocaleString()}</p>
-
-                <div className="small-space"/>
-                <div className="small-space"/>
-
                 <p>{returnCodeToBr(product.description)}</p>
+
+                <div className="medium-space"/>
+
+                <SizeTable
+                    price={product.price}
+                    quantity={product.quantity}
+                />
               </div>
             </div>
         )}
