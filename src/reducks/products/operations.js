@@ -1,6 +1,6 @@
 import {firebaseTimestamp, firestore} from '../../firebase';
 import {push} from 'connected-react-router';
-import {fetchProductsAction} from './actions';
+import {deleteProductsAction, fetchProductsAction} from './actions';
 
 const productRef = firestore.collection('products');
 
@@ -52,6 +52,21 @@ export const fetchProducts = () => {
           });
 
           dispatch(fetchProductsAction(productList));
+        });
+  };
+};
+
+// 商品情報をデーターベースから削除するメソッド
+export const deleteProduct = (id) => {
+  return async (dispatch, getState) => {
+
+    productRef.doc(id)
+        .delete()
+        .then(() => {
+          const prevProducts = getState().products.list;
+          const newProducts = prevProducts.filter(product => product.id !== id);
+
+          dispatch(deleteProductsAction(newProducts));
         });
   };
 };
