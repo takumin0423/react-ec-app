@@ -9,8 +9,6 @@ import {SetSizeArea} from '../components/products';
 const ProductEdit = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [gender, setGender] = useState('');
   const [price, setPrice] = useState('');
   const [sizes, setSizes] = useState([]);
   const [images, setImages] = useState([]);
@@ -37,32 +35,6 @@ const ProductEdit = () => {
     setPrice(event.target.value);
   }, [setPrice]);
 
-  const categories = [
-    {
-      id: 'tops',
-      name: 'トップス',
-    },
-    {
-      id: 'bottom',
-      name: 'ボトムス',
-    },
-  ];
-
-  const genders = [
-    {
-      id: 'male',
-      name: '男性',
-    },
-    {
-      id: 'female',
-      name: '女性',
-    },
-    {
-      id: 'unisex',
-      name: 'ユニセックス',
-    },
-  ];
-
   // マウント後の処理
   useEffect(() => {
     // 編集ページの場合
@@ -75,8 +47,6 @@ const ProductEdit = () => {
 
             setName(product.name);
             setDescription(product.description);
-            setCategory(product.category);
-            setGender(product.gender);
             setPrice(product.price);
             setImages(product.images);
             setSizes(product.sizes);
@@ -86,12 +56,12 @@ const ProductEdit = () => {
 
   return (
       <section>
-        <h1 className="text-headline text-center">商品ページ</h1>
+        <h1 className="text-headline text-center">猫の写真ページ</h1>
 
         <div className="container">
           <TextInput
               fullWidth={true}
-              label={'商品名'}
+              label={'猫の名前'}
               multiline={false}
               required={true}
               onChange={inputName}
@@ -122,22 +92,6 @@ const ProductEdit = () => {
               type={'number'}
           />
 
-          <SelectBox
-              label={'カテゴリー'}
-              required={true}
-              value={category}
-              select={setCategory}
-              options={categories}
-          />
-
-          <SelectBox
-              label={'性別'}
-              required={true}
-              value={gender}
-              select={setGender}
-              options={genders}
-          />
-
           <div className="medium-space"/>
 
           <SetSizeArea
@@ -155,7 +109,7 @@ const ProductEdit = () => {
           <div className="center">
             <PrimaryButton
                 label={'保存する'}
-                onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images, sizes))}
+                onClick={() => dispatch(saveProduct(id, name, description, price, images, sizes))}
             />
           </div>
         </div>

@@ -84,7 +84,7 @@ const SetSizeArea = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>サイズ</TableCell>
+                <TableCell>大きさ</TableCell>
                 <TableCell>数量</TableCell>
                 <TableCell className={classes.iconCell}/>
                 <TableCell className={classes.iconCell}/>
@@ -121,7 +121,7 @@ const SetSizeArea = (props) => {
           <div>
             <TextInput
                 fullWidth={false}
-                label={'サイズ'}
+                label={'大きさ'}
                 multiline={false}
                 required={true}
                 onChange={inputSize}

@@ -3,7 +3,7 @@ import React from 'react';
 const ProductList = () => {
   return (
       <section className="section-wrapper">
-        <div className="p-grid__row">
+        <div className="grid-row">
 
         </div>
       </section>
