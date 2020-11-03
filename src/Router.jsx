@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import PasswordReset from './pages/PasswordReset';
 import ProductList from './pages/ProductList';
 import ProductEdit from './pages/ProductEdit';
+import ProductDetail from './pages/ProductDetail';
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
 
         <Auth>
           <Route exact path={'(/)?'} component={ProductList}/>
+          <Route exact path={'/product/:id'} component={ProductDetail}/>
           <Route path={'/product/edit(/:id)?'} component={ProductEdit}/>
         </Auth>
       </Switch>
