@@ -1,5 +1,6 @@
 import {firebaseTimestamp, firestore} from '../../firebase';
 import {push} from 'connected-react-router';
+import {fetchProductsAction} from './actions';
 
 const productRef = firestore.collection('products');
 
@@ -31,6 +32,25 @@ export const saveProduct = (id, name, description, price, images, sizes) => {
           dispatch(push('/'));
         }).catch((error) => {
           throw new Error(error);
+        });
+  };
+};
+
+// 商品情報をデータベースから取得するメソッド
+export const fetchProducts = () => {
+  return async (dispatch) => {
+    productRef.orderBy('updatedAt', 'desc')
+        .get()
+        .then(snapshots => {
+          const productList = [];
+
+          snapshots.forEach(snapshot => {
+            const product = snapshot.data();
+
+            productList.push(product);
+          });
+
+          dispatch(fetchProductsAction(productList));
         });
   };
 };
