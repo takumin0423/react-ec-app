@@ -20,7 +20,7 @@
     padding: 96px 0
 }
 
-.c-section-wrapin {
+.section-wrapper {
     margin: 0 auto;
     max-width: 575px;
     position: relative;
@@ -70,7 +70,7 @@
     flex-flow: column;
 }
 
-.p-grid__row {
+.grid-row {
     display: flex;
     flex-flow: row wrap;
 }
@@ -172,7 +172,7 @@
     }
 
     /*********** Section ***********/
-    .c-section-wrapin {
+    .section-wrapper {
         max-width: 1024px;
     }
 }
