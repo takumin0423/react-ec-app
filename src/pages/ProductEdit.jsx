@@ -1,9 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {PrimaryButton, SelectBox, TextInput} from '../components/generic';
 import {useDispatch} from 'react-redux';
 import {saveProduct} from '../reducks/products/operations';
 import ImageArea from '../components/products/ImageArea';
 import {firestore} from '../firebase';
+import TextInput from '../components/generic/TextInput';
+import PrimaryButton from '../components/generic/PrimaryButton';
+import SelectBox from '../components/generic/SelectBox';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');

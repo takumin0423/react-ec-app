@@ -1,7 +1,11 @@
 import React from 'react';
 import {Switch, Route} from 'react-router';
-import {PasswordReset, ProductEdit, ProductList, SignIn, SignUp} from './pages';
 import Auth from './Auth';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import PasswordReset from './pages/PasswordReset';
+import ProductList from './pages/ProductList';
+import ProductEdit from './pages/ProductEdit';
 
 const Router = () => {
   return (

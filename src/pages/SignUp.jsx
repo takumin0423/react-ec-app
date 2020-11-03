@@ -1,8 +1,10 @@
 import React, {useCallback, useState} from 'react';
-import {PrimaryButton, SecondaryButton, TextInput} from '../components/generic';
 import {signUp} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
+import TextInput from '../components/generic/TextInput';
+import PrimaryButton from '../components/generic/PrimaryButton';
+import SecondaryButton from '../components/generic/SecondaryButton';
 
 const SignUp = () => {
   const dispatch = useDispatch();
