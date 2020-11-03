@@ -79,9 +79,10 @@ const ProductEdit = () => {
             setGender(product.gender);
             setPrice(product.price);
             setImages(product.images);
+            setSizes(product.sizes);
           });
     }
-  }, []);
+  }, [id]);
 
   return (
       <section>
@@ -154,7 +155,7 @@ const ProductEdit = () => {
           <div className="center">
             <PrimaryButton
                 label={'保存する'}
-                onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images))}
+                onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images, sizes))}
             />
           </div>
         </div>

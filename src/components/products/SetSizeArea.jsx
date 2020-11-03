@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -66,6 +66,16 @@ const SetSizeArea = (props) => {
     setQuantity(quantity);
   };
 
+  // サイズと数量の組み合わせを削除する機能
+  const deleteSize = (deleteIndex) => {
+    const newSizes = props.sizes.filter((item, index) => index !== deleteIndex);
+    props.setSizes(newSizes);
+  };
+
+  useEffect(() => {
+    setIndex(props.sizes.length);
+  }, [props.sizes.length]);
+
   const classes = useStyles();
 
   return (
@@ -95,7 +105,10 @@ const SetSizeArea = (props) => {
                           </IconButton>
                         </TableCell>
                         <TableCell>
-                          <IconButton className={classes.iconCell}>
+                          <IconButton
+                              className={classes.iconCell}
+                              onClick={() => deleteSize(index)}
+                          >
                             <DeleteIcon/>
                           </IconButton>
                         </TableCell>
