@@ -4,14 +4,13 @@ import {useDispatch} from 'react-redux';
 import {saveProduct} from '../reducks/products/operations';
 import ImageArea from '../components/products/ImageArea';
 import {firestore} from '../firebase';
-import {SetSizeArea} from '../components/products';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
-  const [sizes, setSizes] = useState([]);
+  const [quantity, setQuantity] = useState(0);
   const [images, setImages] = useState([]);
 
   const dispatch = useDispatch();
@@ -47,6 +46,10 @@ const ProductEdit = () => {
     setPrice(event.target.value);
   }, [setPrice]);
 
+  const inputQuantity = useCallback((event) => {
+    setQuantity(event.target.value);
+  }, [setQuantity]);
+
   // マウント後の処理
   useEffect(() => {
     // 編集ページの場合
@@ -61,8 +64,8 @@ const ProductEdit = () => {
             setDescription(product.description);
             setCategory(product.category);
             setPrice(product.price);
+            setQuantity(product.quantity);
             setImages(product.images);
-            setSizes(product.sizes);
           });
     }
   }, [id]);
@@ -72,6 +75,11 @@ const ProductEdit = () => {
         <h1 className="text-headline text-center">動物の写真ページ</h1>
 
         <div className="container">
+          <ImageArea
+              images={images}
+              setImages={setImages}
+          />
+
           <TextInput
               fullWidth={true}
               label={'名前'}
@@ -113,24 +121,23 @@ const ProductEdit = () => {
               type={'number'}
           />
 
+          <TextInput
+              fullWidth={true}
+              label={'枚数'}
+              multiline={false}
+              required={true}
+              onChange={inputQuantity}
+              rows={1}
+              value={quantity}
+              type={'number'}
+          />
+
           <div className="medium-space"/>
-
-          <SetSizeArea
-              sizes={sizes}
-              setSizes={setSizes}
-          />
-
-          <div className="small-space"/>
-
-          <ImageArea
-              images={images}
-              setImages={setImages}
-          />
 
           <div className="center">
             <PrimaryButton
                 label={'保存する'}
-                onClick={() => dispatch(saveProduct(id, name, description, category, price, images, sizes))}
+                onClick={() => dispatch(saveProduct(id, name, description, category, price, quantity, images))}
             />
           </div>
         </div>
