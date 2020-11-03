@@ -64,7 +64,7 @@ const ImageArea = (props) => {
           )}
         </div>
         <div className="right-text">
-          <span className="add-product-image-text">商品の画像</span>
+          <span className="add-product-image-text">動物の画像</span>
           <IconButton className={classes.icon}>
             <label>
               <AddAPhotoIcon/>

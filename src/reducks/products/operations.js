@@ -5,13 +5,14 @@ import {fetchProductsAction} from './actions';
 const productRef = firestore.collection('products');
 
 // 商品情報をデータベースに追加するメソッド
-export const saveProduct = (id, name, description, price, images, sizes) => {
+export const saveProduct = (id, name, description, category, price, images, sizes) => {
   return async (dispatch) => {
     const timestamp = firebaseTimestamp.now();
 
     const data = {
       name: name,
       description: description,
+      category: category,
       price: parseInt(price, 10),
       images: images,
       sizes: sizes,
