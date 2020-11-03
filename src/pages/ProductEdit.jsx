@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {saveProduct} from '../reducks/products/operations';
 import ImageArea from '../components/products/ImageArea';
 import {firestore} from '../firebase';
+import {SetSizeArea} from '../components/products';
 
 const ProductEdit = () => {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ const ProductEdit = () => {
   const [category, setCategory] = useState('');
   const [gender, setGender] = useState('');
   const [price, setPrice] = useState('');
+  const [sizes, setSizes] = useState([]);
   const [images, setImages] = useState([]);
 
   const dispatch = useDispatch();
@@ -135,12 +137,19 @@ const ProductEdit = () => {
               options={genders}
           />
 
+          <div className="medium-space"/>
+
+          <SetSizeArea
+              sizes={sizes}
+              setSizes={setSizes}
+          />
+
+          <div className="small-space"/>
+
           <ImageArea
               images={images}
               setImages={setImages}
           />
-
-          <div className="medium-space"/>
 
           <div className="center">
             <PrimaryButton
