@@ -80,11 +80,6 @@
     flex-flow: wrap;
 }
 
-.images-list > .thumbnail-image {
-    margin: .5rem;
-    width: calc(50% - 1rem);
-}
-
 .thumbnail-image {
     position: relative;
     overflow: hidden;
@@ -95,7 +90,7 @@
 .thumbnail-image::before {
     content: "";
     display: block;
-    padding-top: 100%;
+    padding-top: 50%;
 }
 
 .thumbnail-image > img {
