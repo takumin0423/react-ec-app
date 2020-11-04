@@ -65,6 +65,13 @@ const SignIn = () => {
               label={'パスワードリセットページ'}
               onClick={() => dispatch(push('/reset'))}
           />
+
+          <div className="medium-space"/>
+
+          <div>
+            <p>サンプルユーザーID : sample@sample.com</p>
+            <p>サンプルユーザーPASSWORD : password</p>
+          </div>
         </div>
       </div>
   );
