@@ -7,6 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {getProductsInCart, getUserId} from '../../reducks/users/selectors';
 import {useDispatch, useSelector} from 'react-redux';
 import {firestore} from '../../firebase';
+import {fetchProductsInCart} from '../../reducks/users/operations';
 
 const HeaderMenu = (props) => {
   const dispatch = useDispatch()
