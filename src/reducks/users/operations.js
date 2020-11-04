@@ -1,6 +1,7 @@
 import {signInAction, signOutAction} from './actions';
 import {push} from 'connected-react-router';
 import {auth, firebaseTimestamp, firestore} from '../../firebase';
+import {fetchProductsAction} from '../products/actions';
 
 // アカウント登録のメソッド
 export const signUp = (userName, email, password, confirmPassword) => {
@@ -148,6 +149,13 @@ export const addProductToCart = (addedProduct) => {
 
     addedProduct['cartId'] = cartRef.id;
     await cartRef.set(addedProduct);
-    dispatch(push('/'))
+    dispatch(push('/'));
+  };
+};
+
+// カートの中身を取得するメソッド
+export const fetchProductsInCart = (products) => {
+  return async (dispatch) => {
+    dispatch(fetchProductsAction(products));
   };
 };
