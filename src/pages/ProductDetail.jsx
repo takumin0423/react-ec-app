@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {firestore} from '../firebase';
+import React, {useCallback, useEffect, useState} from 'react';
+import {firebaseTimestamp, firestore} from '../firebase';
 import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/styles';
 import HTMLReactParser from 'html-react-parser';
 import ImageSwiper from '../components/products/ImageSwiper';
 import SizeTable from '../components/products/SizeTable';
+import {addProductToCart} from '../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {
@@ -57,6 +58,20 @@ const ProductDetail = () => {
     }
   };
 
+  const addProduct = useCallback(() => {
+    const timestamp = firebaseTimestamp.now();
+
+    dispatch(addProductToCart({
+      addedAt: timestamp,
+      description: product.description,
+      images: product.images,
+      name: product.name,
+      price: product.price,
+      productId: product.id,
+      quantity: 1,
+    }));
+  }, [product]);
+
   useEffect(() => {
     firestore.collection('products')
         .doc(id)
@@ -83,6 +98,7 @@ const ProductDetail = () => {
                 <SizeTable
                     price={product.price}
                     quantity={product.quantity}
+                    addProduct={addProduct}
                 />
               </div>
             </div>

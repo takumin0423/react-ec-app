@@ -132,10 +132,22 @@ export const resetPassword = (email) => {
       auth.sendPasswordResetEmail(email)
           .then(() => {
             alert('パスワードリセット用のメールを入力されたメールアドレス宛に送信しました！');
-            dispatch('/signin')
+            dispatch('/signin');
           }).catch(() => {
-            alert('パスワードリセット用のメールの送信に失敗しました')
-      })
+        alert('パスワードリセット用のメールの送信に失敗しました');
+      });
     }
+  };
+};
+
+// カートに商品を追加するメソッド
+export const addProductToCart = (addedProduct) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const cartRef = firestore.collection('users').doc(uid).collection('cart').doc();
+
+    addedProduct['cartId'] = cartRef.id;
+    await cartRef.set(addedProduct);
+    dispatch(push('/'))
   };
 };
