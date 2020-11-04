@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getIsSignedIn} from '../../reducks/users/selectors';
 import {push} from 'connected-react-router';
 import HeaderMenu from './HeaderMenu';
+import HeaderDrawer from './HeaderDrawer';
 
 const useStyles = makeStyles({
   root: {
@@ -26,10 +27,20 @@ const useStyles = makeStyles({
 });
 
 const Header = (props) => {
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector(state => state);
   const isSignedId = getIsSignedIn(selector);
+
+  const handleDrawerToggle = useCallback((event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setOpen(!open);
+  }, [setOpen, open]);
 
   return (
       <div className={classes.root}>
@@ -46,11 +57,18 @@ const Header = (props) => {
             </div>
             {isSignedId && (
                 <div className={classes.iconButtons}>
-                  <HeaderMenu/>
+                  <HeaderMenu
+                      handleDrawerToggle={handleDrawerToggle}
+                  />
                 </div>
             )}
           </Toolbar>
         </AppBar>
+
+        <HeaderDrawer
+            open={open}
+            onClose={handleDrawerToggle}
+        />
       </div>
   );
 };

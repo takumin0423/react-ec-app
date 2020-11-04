@@ -1,9 +1,9 @@
 import React from 'react';
-import IconButton from "@material-ui/core/IconButton";
-import {Badge} from "@material-ui/core";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from '@material-ui/core/IconButton';
+import {Badge} from '@material-ui/core';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const HeaderMenu = (props) => {
   return (
@@ -18,7 +18,7 @@ const HeaderMenu = (props) => {
           <FavoriteBorderIcon/>
         </IconButton>
 
-        <IconButton>
+        <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
           <MenuIcon/>
         </IconButton>
       </>

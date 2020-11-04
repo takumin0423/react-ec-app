@@ -90,7 +90,7 @@ export const signOut = () => {
         .then(() => {
           dispatch(signOutAction());
 
-          dispatch(push('signin'));
+          dispatch(push('/signin'));
         });
   };
 };
