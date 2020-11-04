@@ -152,7 +152,11 @@
     color: rgba(0, 0, 0, 0.54);
 }
 
-.header-text {
+.header-title {
+    cursor: pointer;
+}
+
+.header-title > span {
     font-size: 36px;
     font-weight: 900;
 }

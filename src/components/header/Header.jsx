@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import {useDispatch, useSelector} from 'react-redux';
 import {getIsSignedIn} from '../../reducks/users/selectors';
 import {push} from 'connected-react-router';
+import HeaderMenu from './HeaderMenu';
 
 const useStyles = makeStyles({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
   },
   menuBar: {
     backgroundColor: '#F9CBA4',
-    color: '#fff',
+    color: 'rgba(0, 0, 0, 0.54)',
   },
   toolbar: {
     margin: '0 auto',
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
 
 const Header = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const selector = useSelector(state => state);
   const isSignedId = getIsSignedIn(selector);
 
@@ -36,9 +38,17 @@ const Header = (props) => {
             className={classes.menuBar}
         >
           <Toolbar className={classes.toolbar}>
-            <div>
-              <span className="header-text">ANIMAL PHOTOGRAPH</span>
+            <div
+                className="header-title"
+                onClick={() => dispatch(push('/'))}
+            >
+              <span>ANIMAL PHOTOGRAPH</span>
             </div>
+            {isSignedId && (
+                <div className={classes.iconButtons}>
+                  <HeaderMenu/>
+                </div>
+            )}
           </Toolbar>
         </AppBar>
       </div>
