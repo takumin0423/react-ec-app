@@ -1,6 +1,6 @@
 import {firebaseTimestamp, firestore} from '../../firebase';
 import {push} from 'connected-react-router';
-import {deleteProductsAction, fetchProductsAction} from './actions';
+import {deleteProductAction, fetchProductsAction} from './actions';
 
 const productRef = firestore.collection('products');
 
@@ -59,14 +59,11 @@ export const fetchProducts = () => {
 // 商品情報をデーターベースから削除するメソッド
 export const deleteProduct = (id) => {
   return async (dispatch, getState) => {
-
-    productRef.doc(id)
-        .delete()
+    productRef.doc(id).delete()
         .then(() => {
-          const prevProducts = getState().products.list;
-          const newProducts = prevProducts.filter(product => product.id !== id);
-
-          dispatch(deleteProductsAction(newProducts));
-        });
-  };
-};
+          const prevProducts = getState().products.list
+          const nextProducts = prevProducts.filter(product => product.id !== id)
+          dispatch(deleteProductAction(nextProducts))
+        })
+  }
+}
