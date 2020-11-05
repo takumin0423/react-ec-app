@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import List from "@material-ui/core/List";
 import {getOrdersHistory} from "../reducks/users/selectors";
-import {OrderHistoryItem} from "../components/Products";
 import {fetchOrdersHistory} from "../reducks/users/operations";
 import {makeStyles} from "@material-ui/styles";
+import OrderHistoryItem from '../components/products/OrderHistoryItem';
 
 const useStyles = makeStyles((theme) => ({
   orderList: {

@@ -4,11 +4,12 @@ const initialState = {
     role: '',
     uid: '',
     userName: '',
-    cart: []
+    cart: [],
+    orders: [],
   },
   products: {
-    list: []
-  }
+    list: [],
+  },
 };
 
 export default initialState;

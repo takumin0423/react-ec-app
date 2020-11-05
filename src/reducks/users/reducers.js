@@ -20,6 +20,12 @@ export const UsersReducer = (state = initialState.users, action) => {
         cart: [...action.payload],
       };
 
+    case Actions.FETCH_ORDERS_HISTORY:
+      return {
+        ...state,
+        orders: [...action.payload]
+      };
+
     default:
       return state;
   }

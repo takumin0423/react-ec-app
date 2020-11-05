@@ -9,6 +9,7 @@ import ProductEdit from './pages/ProductEdit';
 import ProductDetail from './pages/ProductDetail';
 import CartList from './pages/CartList';
 import OrderConfirm from './pages/OrderConfirm';
+import OrderHistory from './pages/OrderHistory';
 
 
 const Router = () => {
@@ -25,6 +26,7 @@ const Router = () => {
 
           <Route exact path="/cart" component={CartList} />
           <Route exact path={'/order/confirm'} component={OrderConfirm}/>
+          <Route exact path="/order/history" component={OrderHistory} />
         </Auth>
       </Switch>
   );
