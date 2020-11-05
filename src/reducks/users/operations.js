@@ -158,3 +158,4 @@ export const fetchProductsInCart = (products) => {
     dispatch(fetchProductsInCartAction(products))
   }
 }
+
