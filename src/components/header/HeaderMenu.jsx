@@ -8,7 +8,7 @@ import {getProductsInCart, getUserId} from '../../reducks/users/selectors';
 import {useDispatch, useSelector} from 'react-redux';
 import {firestore} from '../../firebase';
 import {fetchProductsInCart} from '../../reducks/users/operations';
-import {push} from 'connected-react-router'
+import {push} from 'connected-react-router';
 
 const HeaderMenu = (props) => {
   const dispatch = useDispatch();
@@ -23,14 +23,14 @@ const HeaderMenu = (props) => {
 
           snapshots.docChanges().forEach(change => {
             const product = change.doc.data();
-            const changeType = change.type
+            const changeType = change.type;
 
             switch (changeType) {
               case 'added':
                 productsInCart.push(product);
                 break;
               case 'modified':
-                const index = productsInCart.findIndex(product => product.cartId === change.doc.id)
+                const index = productsInCart.findIndex(product => product.cartId === change.doc.id);
                 productsInCart[index] = product;
                 break;
               case 'removed':
@@ -41,11 +41,11 @@ const HeaderMenu = (props) => {
             }
           });
 
-          dispatch(fetchProductsInCart(productsInCart))
+          dispatch(fetchProductsInCart(productsInCart));
         });
 
-    return () => unsubscribe()
-  },[productsInCart]);
+    return () => unsubscribe();
+  }, []);
 
   return (
       <>
