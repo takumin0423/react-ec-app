@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import HistoryIcon from '@material-ui/icons/History';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {firestore} from '../../firebase';
 
 const useStyles = makeStyles((theme) => ({
       drawer: {
@@ -37,9 +38,10 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderDrawer = (props) => {
   const [keyword, setKeyword] = useState('');
-  const [filters, setFilters] = useState([])
 
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const {container} = props;
 
   const inputKeyword = useCallback((event) => {
     setKeyword(event.target.value);
@@ -50,13 +52,38 @@ const HeaderDrawer = (props) => {
     props.onClose(event);
   };
 
-  const classes = useStyles();
-  const {container} = props;
+  const [filters, setFilters] = useState([
+    {func: selectMenu, label: 'すべて', id: 'all', value: '/'},
+    {func: selectMenu, label: '猫', id: 'cat', value: '/?categories=cat'},
+    {func: selectMenu, label: '犬', id: 'dog', value: '/?categories=dog'},
+    {func: selectMenu, label: 'その他', id: 'other', value: '/?categories=other'},
+  ]);
 
   const menus = [
     {func: selectMenu, label: '商品登録', icon: <AddCircleIcon/>, id: 'register', value: '/product/edit'},
     {func: selectMenu, label: '注文履歴', icon: <HistoryIcon/>, id: 'history', value: '/order/history'},
   ];
+
+  useEffect(() => {
+    firestore.collection('categories')
+        .orderBy('order', 'asc')
+        .get()
+        .then(snapshots => {
+          const list = [];
+
+          snapshots.forEach(snapshot => {
+            const category = snapshot.data();
+            list.push({
+              func: selectMenu,
+              label: category.name,
+              id: category.id,
+              value: `/?category=${category.id}`,
+            });
+          });
+
+          setFilters(prevState => [...prevState, ...list]);
+        });
+  }, []);
 
   return (
       <nav className={classes.drawer}>
@@ -106,6 +133,16 @@ const HeaderDrawer = (props) => {
                 </ListItemIcon>
                 <ListItemText primary={'ログアウト'}/>
               </ListItem>
+            </List>
+
+            <Divider/>
+
+            <List>
+              {filters.map(filter => (
+                  <ListItem button key={filter.id} onClick={(event) => filter.func(event, filter.value)}>
+                    <ListItemText primary={filter.label}/>
+                  </ListItem>
+              ))}
             </List>
           </div>
         </Drawer>
