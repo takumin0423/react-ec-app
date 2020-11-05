@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderDrawer = (props) => {
   const [keyword, setKeyword] = useState('');
+  const [filters, setFilters] = useState([])
 
   const dispatch = useDispatch();
 

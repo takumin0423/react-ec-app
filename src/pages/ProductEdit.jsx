@@ -11,6 +11,7 @@ const ProductEdit = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState([]);
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [images, setImages] = useState([]);
@@ -24,21 +25,6 @@ const ProductEdit = () => {
   if (id !== '') {
     id = id.split('/')[1];
   }
-
-  const categories = [
-    {
-      id: 'cat',
-      name: '猫',
-    },
-    {
-      id: 'dog',
-      name: '犬',
-    },
-    {
-      id: 'other',
-      name: 'その他'
-    }
-  ];
 
   const inputName = useCallback((event) => {
     setName(event.target.value);
@@ -75,6 +61,22 @@ const ProductEdit = () => {
           });
     }
   }, [id]);
+
+  // カテゴリーの取得
+  useEffect(() => {
+    firestore.collection('categories')
+        .orderBy('order', 'asc')
+        .get()
+        .then(snapshots => {
+          const list = [];
+
+          snapshots.forEach(snapshot => {
+            list.push(snapshot.data());
+          });
+
+          setCategories(list);
+        });
+  }, []);
 
   return (
       <section>
