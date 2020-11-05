@@ -14,7 +14,6 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import HistoryIcon from '@material-ui/icons/History';
-import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +55,6 @@ const HeaderDrawer = (props) => {
   const menus = [
     {func: selectMenu, label: '商品登録', icon: <AddCircleIcon/>, id: 'register', value: '/product/edit'},
     {func: selectMenu, label: '注文履歴', icon: <HistoryIcon/>, id: 'history', value: '/order/history'},
-    {func: selectMenu, label: 'プロフィール', icon: <PersonIcon/>, id: 'profile', value: '/user/mypage'},
   ];
 
   return (
@@ -105,7 +103,7 @@ const HeaderDrawer = (props) => {
                 <ListItemIcon>
                   <ExitToAppIcon/>
                 </ListItemIcon>
-                <ListItemText primary={'Logout'}/>
+                <ListItemText primary={'ログアウト'}/>
               </ListItem>
             </List>
           </div>

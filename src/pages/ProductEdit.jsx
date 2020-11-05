@@ -34,6 +34,10 @@ const ProductEdit = () => {
       id: 'dog',
       name: '犬',
     },
+    {
+      id: 'other',
+      name: 'その他'
+    }
   ];
 
   const inputName = useCallback((event) => {
