@@ -38,7 +38,7 @@ export const saveProduct = (id, name, description, category, price, quantity, im
 };
 
 // 商品情報をデータベースから取得するメソッド
-export const fetchProducts = () => {
+export const fetchProducts = (category) => {
   return async (dispatch) => {
     productRef.orderBy('updatedAt', 'desc')
         .get()

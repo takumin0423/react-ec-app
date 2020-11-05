@@ -54,9 +54,6 @@ const HeaderDrawer = (props) => {
 
   const [filters, setFilters] = useState([
     {func: selectMenu, label: 'すべて', id: 'all', value: '/'},
-    {func: selectMenu, label: '猫', id: 'cat', value: '/?categories=cat'},
-    {func: selectMenu, label: '犬', id: 'dog', value: '/?categories=dog'},
-    {func: selectMenu, label: 'その他', id: 'other', value: '/?categories=other'},
   ]);
 
   const menus = [
@@ -65,22 +62,13 @@ const HeaderDrawer = (props) => {
   ];
 
   useEffect(() => {
-    firestore.collection('categories')
-        .orderBy('order', 'asc')
-        .get()
+    firestore.collection('categories').orderBy('order', 'asc').get()
         .then(snapshots => {
           const list = [];
-
           snapshots.forEach(snapshot => {
             const category = snapshot.data();
-            list.push({
-              func: selectMenu,
-              label: category.name,
-              id: category.id,
-              value: `/?category=${category.id}`,
-            });
+            list.push({func: selectMenu, label: category.name, id: category.id, value: `/?category=${category.id}`});
           });
-
           setFilters(prevState => [...prevState, ...list]);
         });
   }, []);

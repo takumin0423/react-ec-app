@@ -9,8 +9,12 @@ const ProductList = () => {
   const selector = useSelector((state) => state);
   const products = getProducts(selector);
 
+  // URLのクエリパラメータを取得
+  const query = selector.router.location.search
+  const category = /^\?category=/.test(query) ? query.split('?category=')[1] : ''
+
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(category));
   }, []);
 
   return (
