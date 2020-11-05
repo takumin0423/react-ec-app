@@ -40,7 +40,7 @@ export const saveProduct = (id, name, description, category, price, quantity, im
 // 商品情報をデータベースから取得するメソッド
 export const fetchProducts = (category) => {
   return async (dispatch) => {
-    let query = productRef.orderBy('updated_at', 'desc');
+    let query = productRef.orderBy('updatedAt', 'desc');
     query = (category !== "") ? query.where('category', '==', category) : query;
 
     query.get()

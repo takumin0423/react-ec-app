@@ -15,7 +15,7 @@ const ProductList = () => {
 
   useEffect(() => {
     dispatch(fetchProducts(category));
-  }, []);
+  }, [query]);
 
   return (
       <section className="section-wrapper">
