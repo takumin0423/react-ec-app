@@ -69,7 +69,7 @@ const SignIn = () => {
           <div className="medium-space"/>
 
           <div>
-            <p>サンプルユーザーID : sample@sample.com</p>
+            <p>サンプルユーザーID : sample0@sample.com</p>
             <p>サンプルユーザーPASSWORD : password</p>
           </div>
         </div>

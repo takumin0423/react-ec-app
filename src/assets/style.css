@@ -158,6 +158,10 @@
     font-weight: 900;
 }
 
+.sold-out-text {
+    word-break: keep-all;
+}
+
 @media screen and (min-width: 576px) {
     .extra-small-space {
         height: 20px

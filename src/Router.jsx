@@ -8,6 +8,7 @@ import ProductList from './pages/ProductList';
 import ProductEdit from './pages/ProductEdit';
 import ProductDetail from './pages/ProductDetail';
 import CartList from './pages/CartList';
+import OrderConfirm from './pages/OrderConfirm';
 
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path={'/product/edit(/:id)?'} component={ProductEdit}/>
 
           <Route exact path="/cart" component={CartList} />
+          <Route exact path={'/order/confirm'} component={OrderConfirm}/>
         </Auth>
       </Switch>
   );

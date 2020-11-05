@@ -1,21 +1,22 @@
 import React, {useCallback, useMemo} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {getProductsInCart} from "../reducks/users/selectors";
-import {makeStyles} from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import {orderProduct} from "../reducks/products/operations";
+import {useDispatch, useSelector} from 'react-redux';
+import {getProductsInCart} from '../reducks/users/selectors';
+import {makeStyles} from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import {orderProduct} from '../reducks/products/operations';
 import PrimaryButton from '../components/generic/PrimaryButton';
 import CartListItem from '../components/products/CartListItem';
+import TextDetail from '../components/generic/TextDetail';
 
 const useStyles = makeStyles((theme) => ({
   detailBox: {
     margin: '0 auto',
     [theme.breakpoints.down('sm')]: {
-      width: 320
+      width: 320,
     },
     [theme.breakpoints.up('md')]: {
-      width: 512
+      width: 512,
     },
   },
   orderBox: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: 256,
     margin: '24px auto 16px auto',
     padding: 16,
-    width: 288
+    width: 288,
   },
 }));
 
@@ -35,17 +36,24 @@ const OrderConfirm = () => {
   const selector = useSelector(state => state);
   const productsInCart = getProductsInCart(selector);
 
-  const subtotal = useMemo(() => {
-    return productsInCart.reduce((sum, product) => sum += product.price, 0)
-  },[productsInCart])
+  // useMemoを使い、productsInCartが変更されるたびに値を再度計算する
+  const subTotal = useMemo(() => {
+    // 前回の計算結果に、次の価格をプラスしていくメソッド
+    return productsInCart.reduce((sum, product) => sum += product.price, 0);
+  }, [productsInCart]);
 
-  const shippingFee = useMemo(() => (subtotal >= 10000) ? 0 : 210,[subtotal])
-  const tax = useMemo(() => (subtotal + shippingFee) * 0.1, [subtotal, shippingFee])
-  const total = useMemo(() => subtotal + shippingFee + tax,[subtotal,shippingFee,tax])
+  // 送料の計算
+  const shippingFee = useMemo(() => (subTotal >= 5000) ? 0 : 100, [subTotal]);
+
+  // 消費税の計算
+  const tax = useMemo(() => (subTotal + shippingFee) * 0.1, [subTotal, shippingFee]);
+
+  // 最終的な価格の計算
+  const total = useMemo(() => subTotal + shippingFee + tax, [subTotal, shippingFee, tax]);
 
   const order = useCallback(() => {
-    dispatch(orderProduct(productsInCart, total))
-  }, [productsInCart])
+    dispatch(orderProduct(productsInCart, total));
+  }, [productsInCart]);
 
   return (
       <section className="section-wrapper">
@@ -54,18 +62,18 @@ const OrderConfirm = () => {
           <div className={classes.detailBox}>
             <List>
               {productsInCart.length > 0 && (
-                  productsInCart.map(product => <CartListItem product={product} key={product.cartId} />)
+                  productsInCart.map(product => <CartListItem product={product} key={product.cartId}/>)
               )}
             </List>
           </div>
           <div className={classes.orderBox}>
-            <TextDetail label={"商品合計"} value={"¥"+subtotal.toLocaleString()} />
-            <TextDetail label={"送料"} value={"¥"+shippingFee.toLocaleString()} />
-            <TextDetail label={"消費税"} value={"¥"+tax.toLocaleString()} />
-            <Divider />
-            <div className="extra-small-space" />
-            <TextDetail label={"合計(税込)"} value={"¥"+total.toLocaleString()} />
-            <PrimaryButton label={"注文を確定する"} onClick={order} />
+            <TextDetail label={'商品合計'} value={`¥${subTotal.toLocaleString()}`}/>
+            <TextDetail label={'送料'} value={`¥${shippingFee.toLocaleString()}`}/>
+            <TextDetail label={'消費税'} value={`¥${tax.toLocaleString()}`}/>
+            <Divider/>
+            <div className="extra-small-space"/>
+            <TextDetail label={'合計(税込)'} value={`¥${total.toLocaleString()}`}/>
+            <PrimaryButton label={'注文を確定する'} onClick={order}/>
           </div>
         </div>
       </section>
