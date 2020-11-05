@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProductsInCart} from '../reducks/users/selectors';
 import List from '@material-ui/core/List';
 import {makeStyles} from '@material-ui/core/styles';
-
 import {push} from 'connected-react-router';
 import PrimaryButton from '../components/generic/PrimaryButton';
 import SecondaryButton from '../components/generic/SecondaryButton';

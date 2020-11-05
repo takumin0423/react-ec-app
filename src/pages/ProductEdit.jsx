@@ -125,7 +125,7 @@ const ProductEdit = () => {
 
           <TextInput
               fullWidth={true}
-              label={'枚数'}
+              label={'在庫'}
               multiline={false}
               required={true}
               onChange={inputQuantity}
