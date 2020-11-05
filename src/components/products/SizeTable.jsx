@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import IconButton from '@material-ui/core/IconButton';
 import TableContainer from '@material-ui/core/TableContainer';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {makeStyles} from '@material-ui/styles';
 
 const useStyles = makeStyles({
@@ -38,11 +37,6 @@ const SizeTable = (props) => {
                 ) : (
                     <div className="sold-out-text">売り切れ</div>
                 )}
-              </TableCell>
-              <TableCell className={classes.iconCell}>
-                <IconButton className={classes.iconCell}>
-                  <FavoriteBorderIcon/>
-                </IconButton>
               </TableCell>
             </TableRow>
           </TableBody>

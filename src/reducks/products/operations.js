@@ -131,7 +131,7 @@ export const orderProduct = (productsInCart, price) => {
         };
 
         orderRef.set(history);
-        dispatch(push('/order/complate'));
+        dispatch(push('/'));
       }).catch((error) => {
         alert('購入処理が中断しました');
         return false;

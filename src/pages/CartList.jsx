@@ -40,7 +40,9 @@ const CartList = () => {
         </List>
         <div className="medium-space"/>
         <div className="grid_column">
-          <PrimaryButton label={'レジへ進む'} onClick={goToOrder}/>
+          {productsInCart.length > 0 && (
+              <PrimaryButton label={'レジへ進む'} onClick={goToOrder}/>
+          )}
           <div className="extra-small-space"/>
           <SecondaryButton label={'ショッピングを続ける'} onClick={backToTop}/>
         </div>

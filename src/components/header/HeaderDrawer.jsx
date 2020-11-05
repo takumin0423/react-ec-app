@@ -88,24 +88,6 @@ const HeaderDrawer = (props) => {
               onClose={(event) => props.onClose(event)}
               onKeyDown={(event) => props.onClose(event)}
           >
-            <div className={classes.searchField}>
-              <TextInput
-                  fullWidth={false}
-                  label={'キーワードを入力'}
-                  multiline={false}
-                  onChange={inputKeyword}
-                  required={false}
-                  rows={1}
-                  value={keyword}
-                  type={'text'}
-              />
-              <IconButton>
-                <SearchIcon/>
-              </IconButton>
-            </div>
-
-            <Divider/>
-
             <List>
               {menus.map(menu => (
                   <ListItem button key={menu.id} onClick={(event) => menu.func(event, menu.value)}>
