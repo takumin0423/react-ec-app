@@ -17,9 +17,9 @@ const ProductList = () => {
       <section className="section-wrapper">
         <div className="grid-row">
           {products.length > 0 && (
-              products.map(product => (
+              products.map((product, index) => (
                   <ProductCard
-                      key={product.id}
+                      key={index}
                       id={product.id}
                       name={product.name}
                       images={product.images}

@@ -9,17 +9,17 @@ const ImageSwiper = (props) => {
       el: '.swiper-pagination',
       type: 'bullets',
       clickable: true,
-      dynamicBullets: true
+      dynamicBullets: true,
     },
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
+      prevEl: '.swiper-button-prev',
     },
     loop: true,
-    spaceBetween: 30
-  })
+    spaceBetween: 30,
+  });
 
-  const images = props.images
+  const images = props.images;
 
   return (
       <Swiper {...params}>
@@ -29,13 +29,13 @@ const ImageSwiper = (props) => {
             </div>
         ) : (
             images.map(image => (
-                <div className="thumbnail-image">
+                <div className="thumbnail-image" key={image.id}>
                   <img src={image.path} alt="商品画像"/>
                 </div>
             ))
         )}
       </Swiper>
-  )
+  );
 };
 
 export default ImageSwiper;
