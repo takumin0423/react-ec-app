@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProductsInCart} from '../reducks/users/selectors';
 import List from '@material-ui/core/List';
 import {makeStyles} from '@material-ui/core/styles';
-import {CartListItem} from '../components/Products';
 
 import {push} from 'connected-react-router';
 import PrimaryButton from '../components/generic/PrimaryButton';
 import SecondaryButton from '../components/generic/SecondaryButton';
+import CartListItem from '../components/products/CartListItem';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '0 auto',
     maxWidth: 512,
